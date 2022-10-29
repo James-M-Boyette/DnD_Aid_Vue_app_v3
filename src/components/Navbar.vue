@@ -1,0 +1,130 @@
+<template>
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg sticky-sm-top navbar-light pt-5 pb-4">
+      <div class="container-xxl">
+        <!-- Navbar brand / title; "linked" to Home, currently -->
+        <a class="navbar-brand" href="/index.html">
+          <span class="text-secondary fw-bold">
+            <i class="bi bi-pc-display-horizontal"></i> Bootstrap 5
+          </span>
+        </a>
+        <!-- Hamburger toggle button for mobile nav -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#main-nav"
+          aria-controls="main-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse align-center" id="main-nav">
+          <ul class="navbar-nav me-auto">
+            <!-- Drop-Down Menu: DEMOs -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Demos:
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <a
+                  class="dropdown-item"
+                  href="/views/demos/demo-headers-text.html"
+                  >Headers & Text</a
+                >
+                <a class="dropdown-item" href="/views/demos/demo-buttons.html"
+                  >Buttons</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="/views/demos/demo-marg-pad-bord-box.html"
+                  >Margin, Padding, Border, Box Shaddow</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="/views/demos/demo-containers.html"
+                  >Containers</a
+                >
+                <a class="dropdown-item" href="/views/demos/demo-grid.html"
+                  >'Grid' Layout</a
+                >
+                <a class="dropdown-item" href="/views/demos/demo-tabs.html"
+                  >Tabs</a
+                >
+              </div>
+            </li>
+            <li></li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <!-- Synthesis Links -->
+
+            <!-- Drop-Down Menu: Synthesis -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Navigation:
+              </a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <a
+                  class="dropdown-item"
+                  href="/views/synthesis/book-store.html#pricing"
+                  >Pricing</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="/views/synthesis/book-store.html#reviews"
+                  >Reviews</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="/views/synthesis/book-store.html#contact"
+                  >Get in Touch</a
+                >
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="btn btn-secondary"
+                href="/views/synthesis/book-store.html"
+              >
+                <i class="bi bi-book-half"></i> Book Store
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
