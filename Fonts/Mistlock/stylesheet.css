@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Mistlock';
+    src: url('Mistlock-Regular.eot');
+    src: local('Mistlock Regular'), local('Mistlock-Regular'),
+        url('Mistlock-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Mistlock-Regular.woff2') format('woff2'),
+        url('Mistlock-Regular.woff') format('woff'),
+        url('Mistlock-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Mistlock Rough';
+    src: url('Mistlock-Rough.eot');
+    src: local('Mistlock Rough'), local('Mistlock-Rough'),
+        url('Mistlock-Rough.eot?#iefix') format('embedded-opentype'),
+        url('Mistlock-Rough.woff2') format('woff2'),
+        url('Mistlock-Rough.woff') format('woff'),
+        url('Mistlock-Rough.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
