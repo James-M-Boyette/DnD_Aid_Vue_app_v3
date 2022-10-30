@@ -1,46 +1,119 @@
 <template>
   <section id="user-login">
-    <div id="login-form-wrapper">
-      <form id="login-form" v-on:submit.prevent="submit()">
-        <h1>Have an account?</h1>
-        <ul>
-          <li class="text-danger" v-for="error in errors" :key="error">
-            {{ error }}
-          </li>
-        </ul>
-        <!-- <div class="form-group">
-        <label>Email:</label>
-        <input type="email" class="form-control" v-model="email" />
-      </div> -->
-        <!-- <div class="form-group"> -->
-        <div class="form-input">
-          <!-- <label>Username:</label> -->
-          <input
-            type="text"
-            class="form-control"
-            v-model="username"
-            placeholder="Username"
-          />
+    <div class="container-lg">
+      <div class="text-center">
+        <h2>Log In</h2>
+      </div>
+      <div class="row justify-content-center my-5">
+        <div class="col-lg-6">
+          <form @submit.prevent="handleSubmit">
+            <!-- <form id="login-form" v-on:submit.prevent="submit()"> -->
+            <!-- User Name -->
+            <label for="user-name" class="form-label">Username:</label>
+            <div class="mb-4 input-group">
+              <span class="input-group-text">
+                <i class="bi bi-person-fill text-primary"></i>
+              </span>
+
+              <input
+                type="text"
+                id="user-name"
+                class="form-control"
+                required
+                v-model="username"
+                placeholder="e.g.    Legolas_Fan_1"
+              />
+              <!-- tooltip -->
+              <span class="input-group-text">
+                <span
+                  class="tt"
+                  data-bs-placement="bottom"
+                  title="The  USER NAME  used for your account?"
+                >
+                  <i class="bi bi-question-circle text-muted"></i>
+                </span>
+              </span>
+            </div>
+
+            <!-- Password -->
+            <label for="password" class="form-label">Password:</label>
+            <div class="input-group mb-4">
+              <!-- This is the shaded icon to the left of the input field ... -->
+              <span class="input-group-text">
+                <i class="bi bi-key-fill text-primary"></i>
+              </span>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                required
+                v-model="password"
+                placeholder="e.g.    myPassw0rd1234"
+              />
+
+              <!-- tooltip -->
+              <span
+                class="input-group-text pe-auto"
+                @click="password_show_hide()"
+              >
+                <span
+                  toggle="#password-field"
+                  id="toggle-password"
+                  class="border-end me-2 pe-2 border-secondary"
+                >
+                  <i class="bi bi-eye-fill text-muted d-none" id="showEye"></i>
+                  <i class="bi bi-eye-slash text-muted" id="hideEye"></i>
+                </span>
+
+                <span
+                  class="tt"
+                  data-bs-placement="bottom"
+                  title="The  PASSWORD  used for your account?"
+                >
+                  <i class="bi bi-question-circle text-muted"></i>
+                </span>
+              </span>
+            </div>
+            <div
+              v-if="passwordError"
+              id="pwLengthError"
+              class="password-error mb-2"
+              style="margin-top: -1.5em !important"
+            >
+              {{ passwordError }}
+            </div>
+            <!-- 'Terms' Checkbox -->
+            <div class="terms">
+              <input type="checkbox" required v-model="consent" />
+              <label class="ms-2">Accept terms and conditions</label>
+            </div>
+
+            <!-- Submit -->
+            <div class="mb-4 mt-3 text-center">
+              <button type="submit" class="btn btn-primary" value="Submit">
+                Login
+              </button>
+              <a class="btn btn-outline-secondary ms-2" href="#" role="button"
+                >Need to sign up for an account?</a
+              >
+            </div>
+          </form>
         </div>
-        <div class="form-input">
-          <!-- <label>Password:</label> -->
-          <input
-            type="password"
-            class="form-control"
-            v-model="password"
-            placeholder="Password"
-          />
-          <span
-            toggle="#password-field"
-            class="fa fa-fw field-icon toggle-password fa-eye"
-          ></span>
-        </div>
-        <!-- <input type="submit" class="btn btn-primary" value="Submit" /> -->
-        <button class="submit-button" type="submit" value="Submit">
-          Login
-        </button>
-        <!-- <button type="submit" class="btn btn-primary" value="Submit" /> -->
-      </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="data-test">
+    <div class="container my-5">
+      <h3>Dynamic Variables ...</h3>
+      <p>
+        Username:
+        {{ username }}
+      </p>
+      <p>Password: {{ password }}</p>
+      <p>passwordError: {{ passwordError }}, {{ password.length }}</p>
+      <!-- <p>Login Errors: {{ errors }}</p> -->
+      <p>Terms Accepted? {{ consent }}</p>
     </div>
   </section>
 </template>
@@ -49,37 +122,77 @@
 import axios from "axios";
 
 export default {
-  data: function () {
+  name: "LoginView",
+
+  // data: function () { // Interesting ... a more explicit Object declaration ...
+  data() {
     return {
-      // email: "",
       username: "",
       password: "",
-      errors: [],
+      // errors: [], // from Capstone login form ...
+      passwordError: "",
+      consent: false,
     };
   },
-  // How does the Login page create state?
-  // It establishes a function "submit" and emplys it at the end of the template as a primary button (btn)
-  // This function 1) creates a temp variable named "params", 2) establishes two keys (email: password:), 3) refers to the data stored in 'data, variables' (w/ same names) - which were updated via v-mode, and 4) stores our local variable contents in the function variables
-  // Next, using axios, this hash variable 'params' is sent to the route api/sessions, waits for a response, and updates the header with a jwt (+ "bearer" syntax) ... it also stores the jwt locally.
-  // Finally, the user is sent on to the webpage "userProfile" ...
   methods: {
-    submit: function () {
-      var params = {
-        // email: this.email,
+    // Reveal or Hide User's pw input ...
+    password_show_hide() {
+      const passwordInputField = document.getElementById("password");
+      const showEye = document.getElementById("showEye");
+      const hideEye = document.getElementById("hideEye");
+      showEye.classList.remove("d-none");
+      if (passwordInputField.type === "password") {
+        passwordInputField.type = "text";
+        showEye.style.display = "block";
+        hideEye.style.display = "none";
+      } else {
+        passwordInputField.type = "password";
+        showEye.style.display = "none";
+        hideEye.style.display = "block";
+      }
+    },
+    // Submit User credentials to server ...
+    handleSubmit() {
+      // Validate Password Length
+      this.passwordError =
+        this.password.length > 5
+          ? ""
+          : "Password must be at least 6 chars long";
+
+      // Alternate hide/show pw length error
+      // const pwLengthError = document.getElementById("pwLengthError");
+      // if (!this.password.length > 5) {
+      //   this.passwordError = "Password must be at least 6 chars long";
+      // pwLengthError.classList.remove("d-none");
+      // }
+      // If Inputs are validated ...
+      /**
+       * TODO: comment below conditional out once FE updates are finished ...
+       */
+      if (!this.passwordError) {
+        console.log("username: ", this.username);
+        console.log("password: ", this.password);
+      }
+      let params = {
         username: this.username,
         password: this.password,
       };
       axios
-        // .post("/api/sessions", params)
-        .post("https://dnd-aid-back-end.herokuapp.com/api/sessions", params)
+        .post("/api/sessions", params) // Local Development
+        // .post(
+        //   "https://evening-retreat-56760.herokuapp.com/https://dnd-aid-back-end.herokuapp.com/api/sessions",
+        //   params
+        // ) // Local Development + CORS proxy
+        // .post("https://dnd-aid-back-end.herokuapp.com/api/sessions", params) // Production
+
         .then((response) => {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           // this.$router.push("/user_profile");
-          this.$router.push(
-            "https://dnd-aid-back-end.herokuapp.com/user_profile"
-          );
+          // this.$router.push(
+          //   "https://dnd-aid-back-end.herokuapp.com/user_profile"
+          // );
         })
         .catch((error) => {
           console.log(error.response);
@@ -87,52 +200,20 @@ export default {
           this.email = "";
           this.password = "";
         });
+      /**
+       * TODO: comment below out once FE updates are finished ...
+       */
+      console.log("Form submitted");
     },
   },
 };
 </script>
 
 <style scoped>
-/* Idea for making the entire background a bit darker than the input fields ... */
-/* body:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  content: "";
-  background: #000;
-  opacity: 0.3;
-  z-index: -1;
-} */
-
-#login-form-wrapper {
-  background-color: #ffffff;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-  border: 3px solid #bcbcbc;
-}
-#login-form {
-  text-align: left;
-  background-color: #ffffff;
-  color: #cecece;
-}
-
-.form-input > input {
-  height: 50px;
-  color: white !important;
-  border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 40px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.text-danger {
-  color: #a94442;
-}
-a.text-danger:focus,
-a.text-danger:hover {
-  color: #843534;
+.password-error {
+  color: #ff0062;
+  /* margin-top: 10px; */
+  font-size: 0.8em;
+  font-weight: bold;
 }
 </style>
