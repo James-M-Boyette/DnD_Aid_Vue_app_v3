@@ -9,7 +9,7 @@
           <form @submit.prevent="handleSubmit">
             <!-- <form id="login-form" v-on:submit.prevent="submit()"> -->
             <!-- User Name -->
-            <label for="user-name" class="form-label">Username:</label>
+            <!-- <label for="user-name" class="form-label">Username:</label>
             <div class="mb-4 input-group">
               <span class="input-group-text">
                 <i class="bi bi-person-fill text-primary"></i>
@@ -21,6 +21,39 @@
                 class="form-control"
                 required
                 v-model="username"
+                placeholder="e.g.    Legolas_Fan_1"
+              /> -->
+            <!-- tooltip -->
+            <!-- <span class="input-group-text">
+                <span
+                  class="tt"
+                  data-bs-placement="bottom"
+                  title="The  USER NAME  used for your account?"
+                >
+                  <i class="bi bi-question-circle text-muted"></i>
+                </span>
+              </span>
+            </div> -->
+
+            <!-- 
+              TODO:
+              Update this & backend to recieve username instead of email
+
+             -->
+
+            <!-- Email -->
+            <label for="email" class="form-label">Email:</label>
+            <div class="mb-4 input-group">
+              <span class="input-group-text">
+                <i class="bi bi-person-fill text-primary"></i>
+              </span>
+
+              <input
+                type="text"
+                id="email"
+                class="form-control"
+                required
+                v-model="email"
                 placeholder="e.g.    Legolas_Fan_1"
               />
               <!-- tooltip -->
@@ -74,6 +107,8 @@
                 </span>
               </span>
             </div>
+
+            <!-- Password Length Validation -->
             <div
               v-if="passwordError"
               id="pwLengthError"
@@ -82,19 +117,17 @@
             >
               {{ passwordError }}
             </div>
-            <!-- 'Terms' Checkbox -->
-            <div class="terms">
-              <input type="checkbox" required v-model="consent" />
-              <label class="ms-2">Accept terms and conditions</label>
-            </div>
 
             <!-- Submit -->
             <div class="mb-4 mt-3 text-center">
               <button type="submit" class="btn btn-primary" value="Submit">
                 Login
               </button>
-              <a class="btn btn-outline-secondary ms-2" href="#" role="button"
-                >Need to sign up for an account?</a
+              <router-link
+                :to="{ name: 'user-sign-up' }"
+                class="btn btn-outline-secondary ms-2"
+              >
+                Need to sign up for an account?</router-link
               >
             </div>
           </form>
@@ -109,6 +142,10 @@
       <p>
         Username:
         {{ username }}
+      </p>
+      <p>
+        Email:
+        {{ email }}
       </p>
       <p>Password: {{ password }}</p>
       <p>passwordError: {{ passwordError }}, {{ password.length }}</p>
@@ -128,6 +165,7 @@ export default {
   data() {
     return {
       username: "",
+      email: "",
       password: "",
       // errors: [], // from Capstone login form ...
       passwordError: "",
@@ -174,25 +212,27 @@ export default {
         console.log("password: ", this.password);
       }
       let params = {
-        username: this.username,
+        // username: this.username,
+        email: this.email,
         password: this.password,
       };
       axios
-        .post("/api/sessions", params) // Local Development
+        // .post("/api/sessions", params) // Local Development
+        // .post("localhost:3000/api/sessions", params) // Local Development
         // .post(
         //   "https://evening-retreat-56760.herokuapp.com/https://dnd-aid-back-end.herokuapp.com/api/sessions",
         //   params
         // ) // Local Development + CORS proxy
-        // .post("https://dnd-aid-back-end.herokuapp.com/api/sessions", params) // Production
+        .post("https://dnd-aid-back-end.herokuapp.com/api/sessions", params) // Production
 
         .then((response) => {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           // this.$router.push("/user_profile");
-          // this.$router.push(
-          //   "https://dnd-aid-back-end.herokuapp.com/user_profile"
-          // );
+          this.$router.push(
+            "https://dnd-aid-back-end.herokuapp.com/user_profile"
+          );
         })
         .catch((error) => {
           console.log(error.response);

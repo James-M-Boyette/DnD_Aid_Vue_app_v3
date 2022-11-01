@@ -1,75 +1,89 @@
 <template>
-  <section id="user-login">
-    <div id="login-form-wrapper">
-      <form id="login-form" v-on:submit.prevent="submit()">
-        <h1>Have an account?</h1>
-        <ul>
-          <li class="text-danger" v-for="error in errors" :key="error">
-            {{ error }}
-          </li>
-        </ul>
-        <!-- <div class="form-group">
-        <label>Email:</label>
-        <input type="email" class="form-control" v-model="email" />
-      </div> -->
-        <!-- <div class="form-group"> -->
-        <div class="form-input">
-          <!-- <label>Username:</label> -->
-          <input
-            type="text"
-            class="form-control"
-            v-model="username"
-            placeholder="Username"
-          />
-        </div>
-        <div class="form-input">
-          <!-- <label>Password:</label> -->
-          <input
-            type="password"
-            class="form-control"
-            v-model="password"
-            placeholder="Password"
-          />
-          <span
-            toggle="#password-field"
-            class="fa fa-fw field-icon toggle-password fa-eye"
-          ></span>
-        </div>
-        <!-- <input type="submit" class="btn btn-primary" value="Submit" /> -->
-        <button class="submit-button" type="submit" value="Submit">
-          Login
-        </button>
-        <!-- <button type="submit" class="btn btn-primary" value="Submit" /> -->
-      </form>
-    </div>
-  </section>
-  <section id="contact">
+  <section id="user-signup">
     <div class="container-lg">
       <div class="text-center">
-        <h2>Log In</h2>
+        <h2>Sign Up</h2>
       </div>
       <div class="row justify-content-center my-5">
         <div class="col-lg-6">
-          <form>
-            <!-- Email Address -->
-            <label for="email" class="form-label">Email address:</label>
-            <div class="input-group mb-4">
-              <!-- This is the shaded icon to the left of the input field ... -->
+          <form @submit.prevent="handleSubmit">
+            <!-- <form id="login-form" v-on:submit.prevent="submit()"> -->
+
+            <!-- First Name -->
+            <label for="firstName" class="form-label">First Name:</label>
+            <div class="mb-4 input-group">
               <span class="input-group-text">
-                <i class="bi bi-envelope-fill text-secondary"></i>
+                <i class="bi bi-person-fill text-primary"></i>
               </span>
+
               <input
                 type="text"
-                id="email"
+                id="firstName"
                 class="form-control"
-                placeholder="e.g. mario@example.com"
+                required
+                v-model="firstName"
+                placeholder="e.g.    Peter"
               />
               <!-- tooltip -->
               <span class="input-group-text">
                 <span
                   class="tt"
-                  data-bs-placement="right"
-                  title="Enter an email address we can reach you at 😄"
+                  data-bs-placement="bottom"
+                  title="What's your first name?"
+                >
+                  <i class="bi bi-question-circle text-muted"></i>
+                </span>
+              </span>
+            </div>
+
+            <!-- Last Name -->
+            <label for="lastName" class="form-label">Last Name:</label>
+            <div class="mb-4 input-group">
+              <span class="input-group-text">
+                <i class="bi bi-person-fill text-primary"></i>
+              </span>
+
+              <input
+                type="text"
+                id="lastName"
+                class="form-control"
+                required
+                v-model="lastName"
+                placeholder="e.g.    Jackson"
+              />
+              <!-- tooltip -->
+              <span class="input-group-text">
+                <span
+                  class="tt"
+                  data-bs-placement="bottom"
+                  title="What's your last name?"
+                >
+                  <i class="bi bi-question-circle text-muted"></i>
+                </span>
+              </span>
+            </div>
+
+            <!-- Email -->
+            <label for="email" class="form-label">Email:</label>
+            <div class="mb-4 input-group">
+              <span class="input-group-text">
+                <i class="bi bi-person-fill text-primary"></i>
+              </span>
+
+              <input
+                type="text"
+                id="email"
+                class="form-control"
+                required
+                v-model="email"
+                placeholder="e.g.    LotR_is_BESTbro@gmail.com"
+              />
+              <!-- tooltip -->
+              <span class="input-group-text">
+                <span
+                  class="tt"
+                  data-bs-placement="bottom"
+                  title="What email can you be reached at?"
                 >
                   <i class="bi bi-question-circle text-muted"></i>
                 </span>
@@ -77,38 +91,190 @@
             </div>
 
             <!-- User Name -->
-            <label for="name" class="form-label">Name:</label>
+            <label for="user-name" class="form-label">Username:</label>
             <div class="mb-4 input-group">
               <span class="input-group-text">
-                <i class="bi bi-person-fill text-secondary"></i>
+                <i class="bi bi-person-fill text-primary"></i>
               </span>
+
               <input
                 type="text"
-                id="name"
+                id="user-name"
                 class="form-control"
-                placeholder="e.g. Mario"
+                required
+                v-model="userName"
+                placeholder="e.g.    Legolas_Fan_1"
               />
               <!-- tooltip -->
               <span class="input-group-text">
                 <span
                   class="tt"
-                  data-bs-placement="right"
-                  title="What name can we use when referring to you?"
+                  data-bs-placement="bottom"
+                  title="What should people call you on this site?"
                 >
                   <i class="bi bi-question-circle text-muted"></i>
                 </span>
               </span>
             </div>
 
+            <!-- Password -->
+            <label for="password" class="form-label">Password:</label>
+            <div class="input-group mb-4">
+              <!-- This is the shaded icon to the left of the input field ... -->
+              <span class="input-group-text">
+                <i class="bi bi-key-fill text-primary"></i>
+              </span>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                required
+                v-model="password"
+                placeholder="e.g.    myPassw0rd1234"
+              />
+
+              <!-- tooltip -->
+              <span
+                class="input-group-text pe-auto"
+                @click="password_show_hide()"
+              >
+                <span
+                  toggle="#password-field"
+                  id="toggle-password"
+                  class="border-end me-2 pe-2 border-secondary"
+                >
+                  <i class="bi bi-eye-fill text-muted d-none" id="showEye"></i>
+                  <i class="bi bi-eye-slash text-muted" id="hideEye"></i>
+                </span>
+
+                <span
+                  class="tt"
+                  data-bs-placement="bottom"
+                  title="What password would you like to use for authentication?"
+                >
+                  <i class="bi bi-question-circle text-muted"></i>
+                </span>
+              </span>
+            </div>
+
+            <!-- Password Length Validation -->
+            <div
+              v-if="passwordError"
+              id="pwLengthError"
+              class="password-error mb-2"
+              style="margin-top: -1.5em !important"
+            >
+              {{ passwordError }}
+            </div>
+
+            <!-- Password CONFIRMATION -->
+            <label for="password" class="form-label"
+              >Password Confirmation:</label
+            >
+            <div class="input-group mb-4">
+              <!-- This is the shaded icon to the left of the input field ... -->
+              <span class="input-group-text">
+                <i class="bi bi-key-fill text-primary"></i>
+              </span>
+              <input
+                type="password"
+                id="passwordSecond"
+                class="form-control"
+                required
+                v-model="passwordSecond"
+                placeholder="e.g.    myPassw0rd1234"
+              />
+
+              <!-- tooltip -->
+              <span
+                class="input-group-text pe-auto"
+                @click="password_show_hide()"
+              >
+                <span
+                  toggle="#password-field"
+                  id="toggle-password"
+                  class="border-end me-2 pe-2 border-secondary"
+                >
+                  <i class="bi bi-eye-fill text-muted d-none" id="showEye"></i>
+                  <i class="bi bi-eye-slash text-muted" id="hideEye"></i>
+                </span>
+
+                <span
+                  class="tt"
+                  data-bs-placement="bottom"
+                  title="Please re-type your password to ensure correct spelling"
+                >
+                  <i class="bi bi-question-circle text-muted"></i>
+                </span>
+              </span>
+            </div>
+
+            <!-- Password Match Validation -->
+            <div
+              v-if="passwordDoesntMatchError"
+              id="pwMatchError"
+              class="password-error mb-2"
+              style="margin-top: -1.5em !important"
+            >
+              {{ passwordDoesntMatchError }}
+            </div>
+
+            <!-- 'Terms' Checkbox -->
+            <div class="terms">
+              <input type="checkbox" required v-model="consent" />
+              <label class="ms-2">Accept terms and conditions</label>
+            </div>
+
             <!-- Submit -->
-            <div class="mb-4 text-center">
-              <button type="submit" class="btn btn-secondary">Login</button>
+            <div class="mb-4 mt-3 text-center">
+              <button type="submit" class="btn btn-primary" value="Submit">
+                Sign Up
+              </button>
+              <router-link
+                :to="{ name: 'user-login' }"
+                class="btn btn-outline-secondary ms-2"
+              >
+                Already have an account?</router-link
+              >
+              <!-- <a class="btn btn-outline-secondary ms-2" href="#" role="button"
+                >Need to sign up for an account?</a
+              > -->
             </div>
           </form>
         </div>
       </div>
     </div>
-    <i class="bi bi-question-circle text-muted"></i>
+  </section>
+
+  <section class="data-test">
+    <div class="container my-5">
+      <h3>Dynamic Variables ...</h3>
+      <p>
+        First Name:
+        {{ firstName }}
+      </p>
+      <p>
+        Last Name:
+        {{ lastName }}
+      </p>
+      <p>
+        Username:
+        {{ userName }}
+      </p>
+      <p>
+        Email:
+        {{ email }}
+      </p>
+      <p>Password: {{ password }}</p>
+      <p>Password Confirmation: {{ passwordSecond }}</p>
+      <p>
+        password match: {{ passwordDoesntMatchError }}, {{ password }},
+        {{ passwordSecond }}
+      </p>
+      <p>passwordError: {{ passwordError }}, {{ password.length }}</p>
+      <!-- <p>Login Errors: {{ errors }}</p> -->
+      <p>Terms Accepted? {{ consent }}</p>
+    </div>
   </section>
 </template>
 
@@ -116,29 +282,103 @@
 import axios from "axios";
 
 export default {
-  data: function () {
+  name: "LoginView",
+
+  // data: function () { // Interesting ... a more explicit Object declaration ...
+  data() {
     return {
-      // email: "",
-      username: "",
+      firstName: "",
+      lastName: "",
+      userName: "",
+      email: "",
       password: "",
-      errors: [],
+      passwordSecond: "",
+      // errors: [], // from Capstone login form ...
+      passwordError: "",
+      passwordDoesntMatchError: "",
+      consent: false,
     };
   },
-  // How does the Login page create state?
-  // It establishes a function "submit" and emplys it at the end of the template as a primary button (btn)
-  // This function 1) creates a temp variable named "params", 2) establishes two keys (email: password:), 3) refers to the data stored in 'data, variables' (w/ same names) - which were updated via v-mode, and 4) stores our local variable contents in the function variables
-  // Next, using axios, this hash variable 'params' is sent to the route api/sessions, waits for a response, and updates the header with a jwt (+ "bearer" syntax) ... it also stores the jwt locally.
-  // Finally, the user is sent on to the webpage "userProfile" ...
+
+  // Validate that passwords match ...
+  watch: {
+    password() {
+      // Validate Password Length
+      this.passwordError =
+        this.password.length > 5
+          ? ""
+          : "Password must be at least 6 chars long";
+    },
+    passwordSecond() {
+      // Validate Passwords Match
+      this.passwordDoesntMatchError =
+        this.password === this.passwordSecond ? "" : "Passwords must match";
+    },
+    /**
+     *  TODO
+     *   - Delete this alternative ...
+     */
+    // Alternate hide/show pw length error
+    // const pwLengthError = document.getElementById("pwLengthError");
+    // if (!this.password.length > 5) {
+    //   this.passwordError = "Password must be at least 6 chars long";
+    // pwLengthError.classList.remove("d-none");
+    // }
+  },
+
   methods: {
-    submit: function () {
-      var params = {
-        // email: this.email,
-        username: this.username,
+    // Reveal or Hide User's pw input ...
+    password_show_hide() {
+      const passwordInputField = document.getElementById("password");
+      const showEye = document.getElementById("showEye");
+      const hideEye = document.getElementById("hideEye");
+      showEye.classList.remove("d-none");
+      if (passwordInputField.type === "password") {
+        passwordInputField.type = "text";
+        showEye.style.display = "block";
+        hideEye.style.display = "none";
+      } else {
+        passwordInputField.type = "password";
+        showEye.style.display = "none";
+        hideEye.style.display = "block";
+      }
+    },
+
+    // Submit User credentials to server ...
+    handleSubmit(e) {
+      // If Inputs are validated ...
+      /**
+       * TODO:
+       *  - Create a validation, etc. that blocks submission if above validators fail
+       */
+      // let validationFailed = false;
+      // do your validation here ...
+      if (this.passwordError || this.passwordDoesntMatchError) {
+        console.log("Validators failed ☠️");
+        e.preventDefault();
+        return false;
+      }
+      /**
+       * TODO: comment below conditional out once FE updates are finished ...
+       */
+      if (!this.passwordError) {
+        console.log("username: ", this.username);
+        console.log("password: ", this.password);
+      }
+      let params = {
+        // username: this.username,
+        email: this.email,
         password: this.password,
       };
       axios
-        // .post("/api/sessions", params)
-        .post("https://dnd-aid-back-end.herokuapp.com/api/sessions", params)
+        // .post("/api/sessions", params) // Local Development
+        // .post("localhost:3000/api/sessions", params) // Local Development
+        // .post(
+        //   "https://evening-retreat-56760.herokuapp.com/https://dnd-aid-back-end.herokuapp.com/api/sessions",
+        //   params
+        // ) // Local Development + CORS proxy
+        .post("https://dnd-aid-back-end.herokuapp.com/api/sessions", params) // Production
+
         .then((response) => {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
@@ -154,9 +394,20 @@ export default {
           this.email = "";
           this.password = "";
         });
+      /**
+       * TODO: comment below out once FE updates are finished ...
+       */
+      console.log("Form submitted");
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.password-error {
+  color: #ff0062;
+  /* margin-top: 10px; */
+  font-size: 0.8em;
+  font-weight: bold;
+}
+</style>
