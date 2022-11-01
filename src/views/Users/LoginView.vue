@@ -9,7 +9,7 @@
           <form @submit.prevent="handleSubmit">
             <!-- <form id="login-form" v-on:submit.prevent="submit()"> -->
             <!-- User Name -->
-            <!-- <label for="user-name" class="form-label">Username:</label>
+            <label for="user-name" class="form-label">Username:</label>
             <div class="mb-4 input-group">
               <span class="input-group-text">
                 <i class="bi bi-person-fill text-primary"></i>
@@ -21,39 +21,6 @@
                 class="form-control"
                 required
                 v-model="userName"
-                placeholder="e.g.    Legolas_Fan_1"
-              /> -->
-            <!-- tooltip -->
-            <!-- <span class="input-group-text">
-                <span
-                  class="tt"
-                  data-bs-placement="bottom"
-                  title="The  USER NAME  used for your account?"
-                >
-                  <i class="bi bi-question-circle text-muted"></i>
-                </span>
-              </span>
-            </div> -->
-
-            <!-- 
-              TODO:
-              Update this & backend to recieve username instead of email
-
-             -->
-
-            <!-- Email -->
-            <label for="email" class="form-label">Email:</label>
-            <div class="mb-4 input-group">
-              <span class="input-group-text">
-                <i class="bi bi-person-fill text-primary"></i>
-              </span>
-
-              <input
-                type="text"
-                id="email"
-                class="form-control"
-                required
-                v-model="email"
                 placeholder="e.g.    Legolas_Fan_1"
               />
               <!-- tooltip -->
@@ -204,17 +171,9 @@ export default {
       // pwLengthError.classList.remove("d-none");
       // }
       // If Inputs are validated ...
-      /**
-       * TODO: comment below conditional out once FE updates are finished ...
-       */
-      if (!this.passwordError) {
-        console.log("username: ", this.userName);
-        console.log("email: ", this.email);
-        console.log("password: ", this.password);
-      }
       let params = {
-        // username: this.userName,
-        email: this.email,
+        username: this.userName,
+        // email: this.email,
         password: this.password,
       };
       axios
@@ -237,10 +196,6 @@ export default {
           this.email = "";
           this.password = "";
         });
-      /**
-       * TODO: comment below out once FE updates are finished ...
-       */
-      console.log("Form submitted");
     },
   },
 };
