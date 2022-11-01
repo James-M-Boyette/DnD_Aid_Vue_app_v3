@@ -96,14 +96,12 @@
                 TODO:
                 - This needs to run a composable for logging a person out (before returning them to the landing page)
                -->
-              <router-link :to="{ name: 'home' }" class="dropdown-item"
+              <router-link
+                :to="{ name: 'home' }"
+                class="dropdown-item"
+                @click="logout"
                 ><i class="bi bi-escape me-1"></i> Log Out</router-link
               >
-              <!-- 
-                TODO:
-                - Update with profile link
-
-               -->
               <router-link :to="{ name: 'user-profile' }" class="dropdown-item"
                 ><i class="bi bi-person-lines-fill me-1"></i> View
                 Profile</router-link
@@ -116,6 +114,25 @@
   </nav>
 </template>
 
-<script></script>
+<script>
+import axios from "axios";
+
+export default {
+  name: "Navbar",
+  // created() {
+  //   delete axios.defaults.headers.common["Authorization"];
+  //   localStorage.removeItem("jwt");
+  //   this.$router.push({ name: "home" });
+  // },
+  methods: {
+    logout() {
+      delete axios.defaults.headers.common["Authorization"];
+      localStorage.removeItem("jwt");
+      console.log("Goodbye 👋", localStorage.getItem("jwt"));
+      this.$router.push({ name: "home" });
+    },
+  },
+};
+</script>
 
 <style></style>
