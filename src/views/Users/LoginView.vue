@@ -20,7 +20,7 @@
                 id="user-name"
                 class="form-control"
                 required
-                v-model="username"
+                v-model="userName"
                 placeholder="e.g.    Legolas_Fan_1"
               /> -->
             <!-- tooltip -->
@@ -141,7 +141,7 @@
       <h3>Dynamic Variables ...</h3>
       <p>
         Username:
-        {{ username }}
+        {{ userName }}
       </p>
       <p>
         Email:
@@ -164,7 +164,7 @@ export default {
   // data: function () { // Interesting ... a more explicit Object declaration ...
   data() {
     return {
-      username: "",
+      userName: "",
       email: "",
       password: "",
       // errors: [], // from Capstone login form ...
@@ -208,31 +208,28 @@ export default {
        * TODO: comment below conditional out once FE updates are finished ...
        */
       if (!this.passwordError) {
-        console.log("username: ", this.username);
+        console.log("username: ", this.userName);
+        console.log("email: ", this.email);
         console.log("password: ", this.password);
       }
       let params = {
-        // username: this.username,
+        // username: this.userName,
         email: this.email,
         password: this.password,
       };
       axios
-        // .post("/api/sessions", params) // Local Development
-        // .post("localhost:3000/api/sessions", params) // Local Development
-        // .post(
-        //   "https://evening-retreat-56760.herokuapp.com/https://dnd-aid-back-end.herokuapp.com/api/sessions",
-        //   params
+        .post("/api/sessions", params) // Local Development
         // ) // Local Development + CORS proxy
-        .post("https://dnd-aid-back-end.herokuapp.com/api/sessions", params) // Production
+        // .post("https://dnd-aid-back-end.herokuapp.com/api/sessions", params) // Production
 
         .then((response) => {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
-          // this.$router.push("/user_profile");
-          this.$router.push(
-            "https://dnd-aid-back-end.herokuapp.com/user_profile"
-          );
+          this.$router.push({ name: "user-profile" });
+          // this.$router.push(
+          //   "https://dnd-aid-back-end.herokuapp.com/user_profile"
+          // );
         })
         .catch((error) => {
           console.log(error.response);

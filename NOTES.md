@@ -18,7 +18,7 @@ Redoing this project afforded me the opportunity to learn and further-cement my 
   - I also know that speed is an important skill for almost any job I land going-forward.
   - As a result, this was a great opportunity to both learn tools (like frontend and style frameworks) and strengthen habits that would allow me to be faster while I strive for good work product.
 
-- [ ]
+- [ ] I wanted to refresh my familiarity with Rails server architecture and interactions (logging in/out, making requests, etc.)
 - [ ]
 
 ## What technologies was I trying to learn?
