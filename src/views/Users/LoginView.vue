@@ -79,7 +79,7 @@
             <div
               v-if="passwordError"
               id="pwLengthError"
-              class="password-error mb-2"
+              class="password-error mb-2 text-danger fw-bold"
               style="margin-top: -1.5em !important"
             >
               {{ passwordError }}
@@ -164,12 +164,6 @@ export default {
           ? ""
           : "Password must be at least 6 chars long";
 
-      // Alternate hide/show pw length error
-      // const pwLengthError = document.getElementById("pwLengthError");
-      // if (!this.password.length > 5) {
-      //   this.passwordError = "Password must be at least 6 chars long";
-      // pwLengthError.classList.remove("d-none");
-      // }
       // If Inputs are validated ...
       let params = {
         username: this.userName,
@@ -202,11 +196,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.password-error {
-  color: #ff0062;
-  /* margin-top: 10px; */
-  font-size: 0.8em;
-  font-weight: bold;
-}
-</style>
+<style scoped></style>

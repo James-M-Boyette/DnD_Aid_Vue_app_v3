@@ -161,7 +161,7 @@
             <div
               v-if="passwordError"
               id="pwLengthError"
-              class="password-error mb-2"
+              class="mb-2 text-danger fw-bold"
               style="margin-top: -1.5em !important"
             >
               {{ passwordError }}
@@ -213,17 +213,29 @@
             <div
               v-if="passwordDoesntMatchError"
               id="pwMatchError"
-              class="password-error mb-2"
+              class="mb-2 text-danger fw-bold"
               style="margin-top: -1.5em !important"
             >
               {{ passwordDoesntMatchError }}
             </div>
 
-            <!-- 'Terms' Checkbox -->
+            <!-- 'Terms' Checkbox + Modal trigger -->
             <div class="terms">
               <input type="checkbox" required v-model="consent" />
-              <label class="ms-2">Accept terms and conditions</label>
+              <label class="ms-2"
+                >Accept
+                <a
+                  href=""
+                  type="button"
+                  class="btn btn-link ps-1 pt-0"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  >terms & conditions</a
+                >
+              </label>
             </div>
+            <!-- 'Terms' Modal -->
+            <TermsModal @termsAccepted="toggleConsentViaModal" />
 
             <!-- Submit -->
             <div class="mb-4 mt-3 text-center">
@@ -236,9 +248,6 @@
               >
                 Already have an account?</router-link
               >
-              <!-- <a class="btn btn-outline-secondary ms-2" href="#" role="button"
-                >Need to sign up for an account?</a
-              > -->
             </div>
           </form>
         </div>
@@ -246,7 +255,7 @@
     </div>
   </section>
 
-  <section class="data-test">
+  <!-- <section class="data-test">
     <div class="container my-5">
       <h3>Dynamic Variables ...</h3>
       <p>
@@ -266,25 +275,23 @@
         {{ email }}
       </p>
       <p>Password: {{ password }}</p>
-      <p>Password Confirmation: {{ passwordSecond }}</p>
-      <p>
-        password match: {{ passwordDoesntMatchError }}, {{ password }},
-        {{ passwordSecond }}
-      </p>
+      <p>Password2: {{ passwordSecond }}</p>
+      <p>password match: {{ passwordDoesntMatchError }}</p>
       <p>passwordError: {{ passwordError }}, {{ password.length }}</p>
-      <!-- <p>Login Errors: {{ errors }}</p> -->
       <p>Terms Accepted? {{ consent }}</p>
     </div>
-  </section>
+  </section> -->
 </template>
 
 <script>
 import axios from "axios";
+import TermsModal from "../../components/Users/TermsModal.vue";
 
 export default {
   name: "LoginView",
-
-  // data: function () { // Interesting ... a more explicit Object declaration ...
+  components: {
+    TermsModal,
+  },
   data() {
     return {
       firstName: "",
@@ -296,6 +303,7 @@ export default {
       // errors: [], // from Capstone login form ...
       passwordError: "",
       passwordDoesntMatchError: "",
+      // Terms Modal Data
       consent: false,
     };
   },
@@ -310,20 +318,10 @@ export default {
           : "Password must be at least 6 chars long";
     },
     passwordSecond() {
-      // Validate Passwords Match
+      // Validate Both Passwords Match
       this.passwordDoesntMatchError =
         this.password === this.passwordSecond ? "" : "Passwords must match";
     },
-    /**
-     *  TODO
-     *   - Delete this alternative ...
-     */
-    // Alternate hide/show pw length error
-    // const pwLengthError = document.getElementById("pwLengthError");
-    // if (!this.password.length > 5) {
-    //   this.passwordError = "Password must be at least 6 chars long";
-    // pwLengthError.classList.remove("d-none");
-    // }
   },
 
   methods: {
@@ -341,6 +339,14 @@ export default {
         passwordInputField.type = "password";
         showEye.style.display = "none";
         hideEye.style.display = "block";
+      }
+    },
+
+    // Toggle 'Terms' Modal Visibility ...
+    toggleConsentViaModal() {
+      console.log("toggleConsentViaModal Triggered ...");
+      if (!this.consent) {
+        this.consent = true;
       }
     },
 
@@ -403,11 +409,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.password-error {
-  color: #ff0062;
-  /* margin-top: 10px; */
-  font-size: 0.8em;
-  font-weight: bold;
-}
-</style>
+<style scoped></style>
