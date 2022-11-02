@@ -173,7 +173,7 @@ export default {
       // If Inputs are validated ...
       let params = {
         username: this.userName,
-        // email: this.email,
+        // email: this.email,s
         password: this.password,
       };
       axios
@@ -185,6 +185,7 @@ export default {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
+          console.log("Logged in:", localStorage.getItem("jwt"));
           this.$router.push({ name: "user-profile" });
           // this.$router.push(
           //   "https://dnd-aid-back-end.herokuapp.com/user_profile"
