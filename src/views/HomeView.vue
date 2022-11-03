@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <main class="home">
+  <div class="home">
     <article class="container">
       <h1>Home</h1>
       <p>
@@ -21,7 +21,7 @@
         architecto maxime sint in dolorem.
       </p>
     </article>
-  </main>
+  </div>
 </template>
 
 <script>

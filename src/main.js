@@ -18,3 +18,5 @@ import "./assets/css/main.css";
 
 const app = createApp(App).use(router).mount("#app");
 import "bootstrap/dist/js/bootstrap.js";
+
+export default app;
