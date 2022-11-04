@@ -44,8 +44,20 @@
     <p class="text-center text-muted">© 2022 Company, Inc</p>
   </footer> -->
 
-  <footer id="main-footer" class="footer fixed-bottom mt-auto py-3">
-    <div class="container">
+  <!-- <footer id="main-footer" class="footer fixed-bottom mt-auto py-3 container"> -->
+  <!-- <div
+    class="container"
+    style="
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      margin: auto !important;
+      width: 100vw !important;
+    "
+  > -->
+  <div class="container">
+    <footer id="main-footer" class="py-3 my-4">
       <div
         class="d-flex flex-wrap justify-content-around align-items-center py-3 mt-auto my-4 border-top"
       >
@@ -129,8 +141,13 @@
           </li>
         </ul>
       </div>
+    </footer>
+  </div>
+  <!-- <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted">Place sticky footer content here.</span>
     </div>
-  </footer>
+  </footer> -->
 </template>
 
 <script>

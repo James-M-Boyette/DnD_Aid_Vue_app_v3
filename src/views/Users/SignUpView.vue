@@ -1,6 +1,6 @@
 <template>
   <section id="user-signup">
-    <div class="container-lg">
+    <div class="container">
       <!-- This div controls the alignment all the children elements -->
       <div
         id="row-signup-wrapper"
@@ -9,7 +9,7 @@
         <!-- This div controls the overall width of the visual Signup Element -->
         <div id="col-signup-wrapper" class="col-lg-8">
           <div class="row text-center mb-3">
-            <h2>Sign Up</h2>
+            <h1>Sign Up</h1>
           </div>
           <form @submit.prevent="handleSubmit">
             <!-- FName, LName  -->

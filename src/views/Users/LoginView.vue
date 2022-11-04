@@ -2,7 +2,7 @@
   <section id="user-login">
     <div class="container-lg">
       <div class="text-center">
-        <h2>Log In</h2>
+        <h1>Log In</h1>
       </div>
       <div class="row justify-content-center my-5">
         <div class="col-lg-6">
@@ -103,7 +103,7 @@
     </div>
   </section>
 
-  <section class="data-test">
+  <!-- <section class="data-test">
     <div class="container my-5">
       <h3>Dynamic Variables ...</h3>
       <p>
@@ -116,10 +116,9 @@
       </p>
       <p>Password: {{ password }}</p>
       <p>passwordError: {{ passwordError }}, {{ password.length }}</p>
-      <!-- <p>Login Errors: {{ errors }}</p> -->
       <p>Terms Accepted? {{ consent }}</p>
     </div>
-  </section>
+  </section> -->
 </template>
 
 <script>
