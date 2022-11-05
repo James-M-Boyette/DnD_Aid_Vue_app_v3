@@ -2,7 +2,7 @@
   <main>
     <!-- User Profile View -->
     <section id="user-profile">
-      <div class="container">
+      <div class="container user-form">
         <div
           id="row-profile-wrapper"
           class="row align-items-center justify-content-center my-5"

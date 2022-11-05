@@ -1,0 +1,96 @@
+
+
+
+
+@font-face {
+    font-family: 'the_crow_inlineregular';
+    src: url('thecrowinline-webfont.woff2') format('woff2'),
+         url('thecrowinline-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'the_crow_inline_grungeregular';
+    src: url('thecrowinlinegrunge-webfont.woff2') format('woff2'),
+         url('thecrowinlinegrunge-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'the_crow__inline_shadowRg';
+    src: url('thecrowinlineshadow-webfont.woff2') format('woff2'),
+         url('thecrowinlineshadow-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'the_crow_inline_shadow_grunRg';
+    src: url('thecrowinlineshadowgrunge-webfont.woff2') format('woff2'),
+         url('thecrowinlineshadowgrunge-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'the_crowregular';
+    src: url('thecrowregular-webfont.woff2') format('woff2'),
+         url('thecrowregular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'the_crow_shadowregular';
+    src: url('thecrowshadow-webfont.woff2') format('woff2'),
+         url('thecrowshadow-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'the_crow_shadow_grungeregular';
+    src: url('thecrowshadowgrunge-webfont.woff2') format('woff2'),
+         url('thecrowshadowgrunge-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'the_crow_grungeregular';
+    src: url('thecrowgrunge-webfont.woff2') format('woff2'),
+         url('thecrowgrunge-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}

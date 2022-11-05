@@ -1,6 +1,6 @@
 <template>
   <section id="user-signup">
-    <div class="container">
+    <div class="container user-form">
       <!-- This div controls the alignment all the children elements -->
       <div
         id="row-signup-wrapper"
@@ -496,4 +496,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

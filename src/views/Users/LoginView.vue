@@ -1,6 +1,6 @@
 <template>
   <section id="user-login">
-    <div class="container-lg">
+    <div class="container user-form">
       <div class="text-center">
         <h1>Log In</h1>
       </div>
