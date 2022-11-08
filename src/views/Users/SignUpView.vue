@@ -1,6 +1,6 @@
 <template>
   <section id="user-signup">
-    <div class="container user-form">
+    <div class="container-lg">
       <!-- This div controls the alignment all the children elements -->
       <div
         id="row-signup-wrapper"
@@ -9,7 +9,7 @@
         <!-- This div controls the overall width of the visual Signup Element -->
         <div id="col-signup-wrapper" class="col-lg-8">
           <div class="row text-center mb-3">
-            <h1>Sign Up</h1>
+            <h2>Sign Up</h2>
           </div>
           <form @submit.prevent="handleSubmit">
             <!-- FName, LName  -->
@@ -19,7 +19,7 @@
                 <label for="firstName" class="form-label">First Name:</label>
                 <div class="mb-4 input-group">
                   <span class="input-group-text">
-                    <i class="bi bi-file-person text-primary"></i>
+                    <i class="bi bi-person-fill text-primary"></i>
                   </span>
 
                   <input
@@ -48,7 +48,7 @@
                 <label for="lastName" class="form-label">Last Name:</label>
                 <div class="mb-4 input-group">
                   <span class="input-group-text">
-                    <i class="bi bi-file-person-fill text-primary"></i>
+                    <i class="bi bi-person-fill text-primary"></i>
                   </span>
 
                   <input
@@ -80,7 +80,7 @@
                 <label for="user-name" class="form-label">Username:</label>
                 <div class="mb-4 input-group">
                   <span class="input-group-text">
-                    <i class="bi bi-controller text-primary"></i>
+                    <i class="bi bi-person-fill text-primary"></i>
                   </span>
 
                   <input
@@ -108,7 +108,7 @@
                 <label for="email" class="form-label">Email:</label>
                 <div class="mb-4 input-group">
                   <span class="input-group-text">
-                    <i class="bi bi-envelope-fill text-primary"></i>
+                    <i class="bi bi-person-fill text-primary"></i>
                   </span>
 
                   <input
@@ -198,7 +198,7 @@
                 <div class="input-group mb-4">
                   <!-- This is the shaded icon to the left of the input field ... -->
                   <span class="input-group-text">
-                    <i class="bi bi-key text-primary"></i>
+                    <i class="bi bi-key-fill text-primary"></i>
                   </span>
                   <input
                     type="password"
@@ -206,7 +206,7 @@
                     class="form-control"
                     required
                     v-model="passwordSecond"
-                    placeholder="Make sure you've typed it correctly"
+                    placeholder="e.g.    myPassw0rd1234"
                   />
 
                   <!-- tooltip -->
@@ -252,21 +252,8 @@
               <!-- 'Terms' Checkbox + Modal trigger -->
               <div class="terms col-md-8 col-lg-8 col-xl-7 col-xxl-12">
                 <input type="checkbox" required v-model="consent" />
-                <label class="ms-2">
-                  <button
-                    type="button"
-                    class="btn btn-success btn-sm"
-                    @click="
-                      {
-                        {
-                          this.consent = !this.consent;
-                        }
-                      }
-                    "
-                  >
-                    Accept
-                  </button>
-
+                <label class="ms-2"
+                  >Accept
                   <a
                     href=""
                     type="button"
@@ -496,6 +483,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
