@@ -235,6 +235,7 @@ export default {
   // Vue 2's 'Options API' version ...
   data() {
     return {
+      currentUserRef: {},
       currentUser: {},
       firstName: "Ze User's First Name",
       lastName: "Ze User's Last Name",
@@ -247,20 +248,6 @@ export default {
       passwordError: "",
       passwordDoesntMatchError: "",
     };
-  },
-  created() {
-    // getUserData() {
-    axios.get("/api/users/current_user").then((response) => {
-      // axios
-      //   .get("https://dnd-aid-back-end.herokuapp.com/api/users/current_user")
-      // .then((response) => {
-      console.log("Here's the user's data:", response.data);
-      // current_user's info is stored in var currentUser
-      currentUser = response.data;
-      // currentUser.value.uScreenName = "CAPTAIN_BLAH!";
-      // console.log("currentUser:", this.currentUser);
-    });
-    // },
   },
   watch: {
     password() {
@@ -286,10 +273,52 @@ export default {
     },
   },
 
+  // Vue 3's "Composition" API ...
+  setup() {
+    const currentUser = ref({
+      adminLevel: null,
+      email: "not-an-email@gmail.com",
+      id: null,
+      password: null,
+      uFirstName: "Jaqen ",
+      uLastName: "H'ghar",
+      uScreenName: "@_man_of_8rav0s",
+      userID: null,
+    });
+
+
+    watchEffect(() => {
+      console.log(
+        "currentUser function ran",
+        currentUser.value,
+        "currentUser.value.uFirstName:",
+        currentUser.value.uFirstName
+      );
+    });
+    // console.log("currentUser:", currentUser.value);
+
+    // Get current_user's info (Currently Working)
+    const getUserData = () => {
+      axios.get("/api/users/current_user").then((response) => {
+        // axios
+        //   .get("https://dnd-aid-back-end.herokuapp.com/api/users/current_user")
+        // .then((response) => {
+        console.log("Here's the user's data:", response.data);
+        // current_user's info is stored in var currentUser
+        currentUser.value = response.data;
+        // currentUser.value.uScreenName = "CAPTAIN_BLAH!";
+        // console.log("currentUser:", this.currentUser);
+      });
+    };
+    getUserData();
+
+    return { currentUser, watchEffect };
+  },
   methods: {
     // Reveal or Hide User's pw input ...
     password_show_hide() {
-      console.log("Current User:", currentUser);
+      console.log("Current User:", currentUser.value);
+      console.log("Current User Ref:", currentUserRef);
 
       const passwordInputField = document.getElementById("password");
       const showEye = document.getElementById("showEye");
@@ -305,6 +334,19 @@ export default {
         hideEye.style.display = "block";
       }
     },
+
+    getUserData = () => {
+      axios.get("/api/users/current_user").then((response) => {
+        // axios
+        //   .get("https://dnd-aid-back-end.herokuapp.com/api/users/current_user")
+        // .then((response) => {
+        console.log("Here's the user's data:", response.data);
+        // current_user's info is stored in var currentUser
+        currentUser.value = response.data;
+        // currentUser.value.uScreenName = "CAPTAIN_BLAH!";
+        // console.log("currentUser:", this.currentUser);
+      });
+    };
 
     // Submit User credentials to server ...
     handleSubmit(e) {

@@ -1,5 +1,11 @@
 # DnDAid_Vue_app_v3
 
+## Starting the App
+
+To start the frontend of this app locally, run `npm run dev` & open `localhost:5173` in your browser. If everything is working correctly, you should see the placeholder text "DnD Aid will be displayed here ..." (from index.html's "#app" component import).
+
+<!-- From original, vanilla Vue 3 install ... -->
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup

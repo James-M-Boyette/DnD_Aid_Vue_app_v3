@@ -13,8 +13,6 @@
   background-color: #393939;
 } */
 
-
-
 body {
   background-image: url("../background/hexellence.png");
   background-repeat: repeat;
@@ -26,11 +24,10 @@ body {
 
   /* Fonts */
   /* font-family: 'the_crow_inlineregular' !important; */
-  font-family: 'Mistlock-Regular' !important;
-  font-weight:normal;
-  font-style:normal;
+  font-family: "Mistlock-Regular" !important;
+  font-weight: normal;
+  font-style: normal;
 }
-
 
 body > section.container {
   /* flex: 1 0 auto; */
@@ -51,21 +48,21 @@ footer {
 .container.user-form {
   background-color: rgba(44, 44, 44, 0.55);
   padding-top: 10px;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 15px;
-    border-color:#d2d2d2;
-    border-width: 5px;
-    color:white;
-    box-shadow:0 1px 0 #cfcfcf;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  border-color: #d2d2d2;
+  border-width: 5px;
+  color: white;
+  box-shadow: 0 1px 0 #cfcfcf;
 }
 
-.form-control{
-    background:transparent!important;
-    color:white!important;
-    font-size: 18px!important;
-    border-radius: 10px;
+.form-control {
+  background: transparent !important;
+  color: white !important;
+  font-size: 18px !important;
+  border-radius: 10px;
 }
 
 @media (hover: hover) {

@@ -1,108 +1,131 @@
 <template>
-  <main>
-    <!-- User Profile View -->
-    <section id="user-profile">
-      <div class="container user-form">
-        <div
-          id="row-profile-wrapper"
-          class="row align-items-center justify-content-center my-5"
-        >
-          <div
-            id="my-row-#1"
-            class="row align-items-center justify-content-center text-center"
-          >
-            <h1>User Profile</h1>
+  <!-- View User's Profile Data -->
+  <section id="user-profile-view">
+    <!-- Page Header -->
+    <section id="page-name" class="container d-flex justify-content-center">
+      <div id="user-show-page-heading" class="text-center">
+        <h1>Profile:</h1>
+      </div>
+    </section>
 
-            <div
-              id="welcome-message"
-              class="row text-center justify-content-center col-lg-6 mb-3 mt-3"
-            >
-              <h2>
-                Welcome Back,
-                <em>{{ currentUser.uScreenName }}</em> !
-              </h2>
+    <!-- User Greeting Message -->
+    <section id="user-profile-data" class="container">
+      <section id="user-greeting" class="sub-section mt-2">
+        <div id="row-#2" class="row text-center">
+          <h2 class="text-center">
+            Welcome Back,
+            <em>{{ currentUser.uScreenName }}</em> !
+          </h2>
+        </div>
+      </section>
+
+      <!-- User's PERSONAL Info -->
+      <section id="user-personal-info" class="sub-section mt-4">
+        <div id="row-#3" class="row">
+          <h3 class="text-center">Personal Info:</h3>
+
+          <!-- First Name -->
+          <div id="user-first-name" class="row text-start">
+            <label class="col-6 me-auto">First Name:</label>
+            <div class="col-6 ms-auto">
+              {{ currentUser.uFirstName }}
             </div>
           </div>
 
-          <form @submit.prevent="handleSubmit">
-            <UserUpdateInfo />
-          </form>
+          <!-- Last Name -->
+          <div id="user-last-name" class="row text-start">
+            <label class="col-6 ms-auto">Last Name:</label>
+            <div class="col-6 me-auto">
+              {{ currentUser.uLastName }}
+            </div>
+          </div>
 
-          <!-- Characters, Campaigns, Friends -->
-          <div id="user-stats">
-            <!-- <h3>User Characters:</h3> -->
-            <!-- TODO: display stats (# of characters) + make it a link to the index page for characters -->
-            <!-- TODO: make this link to 'characters' index page -->
-            <!-- TODO: make this display all characters - but only their names (as a snippet) -->
-            <!-- <div id="user-characters">
+          <!-- Email -->
+          <div id="user-email" class="row text-start">
+            <label class="col-6 ms-auto">Email:</label>
+            <div class="col-6 me-auto">
+              {{ currentUser.email }}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- User's CREDENTIAL Info -->
+      <section id="user-credential-info" class="sub-section mt-4">
+        <div id="row-#3" class="row">
+          <h3 class="text-center">User Credentials:</h3>
+
+          <!-- Screen Name -->
+          <div id="user-screen-name" class="row text-start">
+            <label class="col-6 ms-auto">Screen Name:</label>
+            <div class="col-6 me-auto">
+              {{ currentUser.uScreenName }}
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div id="user-password" class="row text-start">
+            <label class="col-6 ms-auto">Password:</label>
+            <div class="col-6 me-auto">
+              {{ currentUser.password }}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- User's CHARACTERS Info -->
+      <!-- 
+        TODO:
+        display stats (# of characters) + make it a link to the index page for characters
+       -->
+      <!-- <section id="user-credential-info" class="sub-section mt-4">
+        <div class="container d-flex justify-content-center">
+          <div id="user-info">
+            <div id="user-stats">
+              <h3>Your Characters:</h3> -->
+      <!-- TODO: make this link to 'characters' index page -->
+      <!-- TODO: make this display all characters - but only their names (as a snippet) -->
+      <!-- <div id="user-characters">
               Current Characters:
               <span>{{}}</span>
             </div> -->
-            <!-- TODO: make this link to 'campaigns' index page -->
-            <!-- TODO: make this display all campaigns - but only the campaign names (as a snippet) -->
-            <!-- <div id="user-campaigns">
+      <!-- TODO: make this link to 'campaigns' index page -->
+      <!-- TODO: make this display all campaigns - but only the campaign names (as a snippet) -->
+      <!-- <div id="user-campaigns">
               Current Campaigns:
               <span>{{}}</span>
             </div> -->
-            <!-- TODO: make this link to 'friends' index page -->
-            <!-- TODO: make this display all friends - but only their screen names (as a snippet) -->
-            <!-- <div id="user-friends">
+      <!-- TODO: make this link to 'friends' index page -->
+      <!-- TODO: make this display all friends - but only their screen names (as a snippet) -->
+      <!-- <div id="user-friends">
               Friends:
               <span>{{}}</span>
             </div> -->
+      <!-- </div>
           </div>
         </div>
-      </div>
+      </section> -->
     </section>
-  </main>
+  </section>
 </template>
 
 <script>
 import axios from "axios";
 import { ref, reactive, computed, watchEffect } from "vue";
 
-import UserUpdateInfo from "../../components/Users/UserUpdateInfo.vue";
-
 export default {
   name: "UserProfileView",
-  components: {
-    UserUpdateInfo,
-  },
   // Vue 2's 'Options API' version ...
-  data() {
-    return {
-      currentUserRef: {},
-      firstName: "Ze User's First Name",
-      lastName: "Ze User's Last Name",
-      userName: "Ze User's 'User' Name",
-      email: "Ze User's Email",
-      password: "Even we don't know!",
-      pwMessage: "Even we don't know!",
-    };
-  },
-  watch: {
-    password() {
-      // Validate Password Length
-      if (this.password.length < 6 && this.password.length > 0) {
-        this.passwordError = "Password must be at least 6 chars long";
-      } else {
-        this.passwordError = "";
-        this.validatorsFailed = false;
-      }
-    },
-    passwordSecond() {
-      // Validate Both Passwords Match
-      if (
-        this.password != this.passwordSecond &&
-        this.passwordSecond.length > 0
-      ) {
-        this.passwordDoesntMatchError = "Passwords must match";
-      } else {
-        this.passwordDoesntMatchError = "";
-        this.validatorsFailed = false;
-      }
-    },
-  },
+  // data() {
+  //   return {
+  //     currentUser: {},
+  //     firstName: "Ze User's First Name",
+  //     lastName: "Ze User's Last Name",
+  //     userName: "Ze User's 'User' Name",
+  //     email: "Ze User's Email",
+  //     password: "Even we don't know!",
+  //   };
+  // },
   // async created() {
   //   axios.get("/api/users/current_user").then((response) => {
   //     // axios
@@ -116,7 +139,6 @@ export default {
   //   });
   // },
 
-  // Vue 3's "Composition" API ...
   setup() {
     const currentUser = ref({
       adminLevel: null,
@@ -160,12 +182,7 @@ export default {
     // }
 
     watchEffect(() => {
-      console.log(
-        "currentUser function ran",
-        currentUser.value,
-        "currentUser.value.uFirstName:",
-        currentUser.value.uFirstName
-      );
+      console.log("currentUser function ran", currentUser.value);
     });
     // console.log("currentUser:", currentUser.value);
 
@@ -186,28 +203,8 @@ export default {
 
     return { currentUser, watchEffect };
   },
-  methods: {
-    // Reveal or Hide User's pw input ...
-    password_show_hide() {
-      console.log("Current User:", currentUser.value);
-      console.log("Current User Ref:", currentUserRef);
-
-      const passwordInputField = document.getElementById("password");
-      const showEye = document.getElementById("showEye");
-      const hideEye = document.getElementById("hideEye");
-      showEye.classList.remove("d-none");
-      if (passwordInputField.type === "password") {
-        passwordInputField.type = "text";
-        showEye.style.display = "block";
-        hideEye.style.display = "none";
-      } else {
-        passwordInputField.type = "password";
-        showEye.style.display = "none";
-        hideEye.style.display = "block";
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 
-<style></style>
+<style scoped></style>
