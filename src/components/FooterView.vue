@@ -1,19 +1,22 @@
 <template>
   <div class="container mt-5">
+    <!-- 
+      * (I think ...) the 'nav' class of Bootstrap is dictating the staggered look of the elements @ medium (md) screen size
+     -->
     <footer
       id="main-footer"
-      class="d-flex flex-wrap justify-content-sm-between justify-content-md-around align-items-center py-3 mt-auto my-4 border-top"
+      class="row row-cols-sm-1 row-cols-md-3 py-3 mt-auto mb-3 border-top"
     >
       <!-- Copyright -->
       <p
-        class="col-sm-12 col-md-4 mb-0 mx-sm-auto text-muted order-sm-last order-md-first"
+        class="col-md-12 col-lg-4 order-last order-md-first align-middle mt-2 mt-md-0 text-muted"
       >
         © 2022 James Boyette
       </p>
 
       <!-- Center Icons -->
       <ul
-        class="nav col-sm-12 col-md-4 align-items-center justify-content-md-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none order-sm-2 order-md-2"
+        class="nav col-md-12 col-lg-4 justify-content-md-center align-middle link-dark text-decoration-none order-2"
       >
         <!-- Github -->
         <li class="nav-item">
@@ -62,7 +65,7 @@
 
       <!-- Right-Hand Links -->
       <ul
-        class="nav col-sm-12 col-md-4 justify-content-md-end order-sm-first order-md-last"
+        class="nav col-md-12 col-lg-4 justify-content-md-end align-middle order-first order-md-last"
       >
         <li class="nav-item">
           <router-link :to="{ name: 'home' }" class="nav-link px-2 text-muted">
