@@ -137,64 +137,64 @@ export default {
   //     uScreenName: "@_man_of_8rav0s",
   //     userID: null,
   //   });
-    // const currentUser = computed(async () => {
-    //   try {
-    //     const data = await axios
-    //       .get("/api/users/current_user") //use data destructuring to get data from the promise object
-    //       .then((response) => {
-    //         console.log("Here's the user's data:", response.data);
-    //         return response.data;
-    //       });
-    //     return data;
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
+  // const currentUser = computed(async () => {
+  //   try {
+  //     const data = await axios
+  //       .get("/api/users/current_user") //use data destructuring to get data from the promise object
+  //       .then((response) => {
+  //         console.log("Here's the user's data:", response.data);
+  //         return response.data;
+  //       });
+  //     return data;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
 
-    // axios.get("/api/users/current_user").then((response) => {
-    //   // axios
-    //   //   .get("https://dnd-aid-back-end.herokuapp.com/api/users/current_user")
-    //   // .then((response) => {
-    //   console.log("Here's the user's data:", response.data);
-    //   return response.data;
-    // });
-    // currentUser.value.uScreenName = "CAPTAIN_BLAH!";
-    // });
+  // axios.get("/api/users/current_user").then((response) => {
+  //   // axios
+  //   //   .get("https://dnd-aid-back-end.herokuapp.com/api/users/current_user")
+  //   // .then((response) => {
+  //   console.log("Here's the user's data:", response.data);
+  //   return response.data;
+  // });
+  // currentUser.value.uScreenName = "CAPTAIN_BLAH!";
+  // });
 
-    // function isObjectEmpty(obj) {
-    //   return (
-    //     !!obj && // 👈 null and undefined check
-    //     Object.keys(obj).length === 0 &&
-    //     obj.constructor === Object
-    //   );
-    // }
+  // function isObjectEmpty(obj) {
+  //   return (
+  //     !!obj && // 👈 null and undefined check
+  //     Object.keys(obj).length === 0 &&
+  //     obj.constructor === Object
+  //   );
+  // }
 
-    // watchEffect(() => {
-    //   console.log(
-    //     "currentUser function ran",
-    //     currentUser.value,
-    //     "currentUser.value.uFirstName:"
-    //     // currentUser.value.uFirstName
-    //   );
-    // });
-    // console.log("currentUser:", currentUser.value);
+  // watchEffect(() => {
+  //   console.log(
+  //     "currentUser function ran",
+  //     currentUser.value,
+  //     "currentUser.value.uFirstName:"
+  //     // currentUser.value.uFirstName
+  //   );
+  // });
+  // console.log("currentUser:", currentUser.value);
 
-    // Get current_user's info (Currently Working)
-    const getUserData = () => {
-      axios.get("/api/users/current_user").then((response) => {
-        // axios
-        //   .get("https://dnd-aid-back-end.herokuapp.com/api/users/current_user")
-        // .then((response) => {
-        console.log("Here's the user's data:", response.data);
-        // current_user's info is stored in var currentUser
-        currentUser.value = response.data;
-        // currentUser.value.uScreenName = "CAPTAIN_BLAH!";
-        // console.log("currentUser:", this.currentUser);
-      });
-    };
-    getUserData();
+  // Get current_user's info (Currently Working)
+  //   const getUserData = () => {
+  //     axios.get("/api/users/current_user").then((response) => {
+  //       // axios
+  //       //   .get("https://dnd-aid-back-end.herokuapp.com/api/users/current_user")
+  //       // .then((response) => {
+  //       console.log("Here's the user's data:", response.data);
+  //       // current_user's info is stored in var currentUser
+  //       currentUser.value = response.data;
+  //       // currentUser.value.uScreenName = "CAPTAIN_BLAH!";
+  //       // console.log("currentUser:", this.currentUser);
+  //     });
+  //   };
+  //   getUserData();
 
-    return { currentUser, watchEffect };
-  },
+  //   return { currentUser, watchEffect };
+  // },
   methods: {
     // Reveal or Hide User's pw input ...
     password_show_hide() {
